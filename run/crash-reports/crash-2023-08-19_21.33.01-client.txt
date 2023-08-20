@@ -1,0 +1,196 @@
+---- Minecraft Crash Report ----
+// I just don't know what went wrong :(
+
+Time: 2023-08-19 21:33:01
+Description: Unexpected error
+
+java.lang.NullPointerException: Cannot invoke "net.minecraft.client.gl.ShaderProgram.addSampler(String, Object)" because "shaderProgram" is null
+	at net.minecraft.client.render.WorldRenderer.renderLayer(WorldRenderer.java:1629)
+	at net.minecraft.client.render.WorldRenderer.render(WorldRenderer.java:1253)
+	at net.minecraft.client.render.GameRenderer.renderWorld(GameRenderer.java:1110)
+	at net.minecraft.client.render.GameRenderer.render(GameRenderer.java:880)
+	at net.minecraft.client.MinecraftClient.render(MinecraftClient.java:1219)
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:802)
+	at net.minecraft.client.main.Main.main(Main.java:250)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:468)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraft.client.render.WorldRenderer.renderLayer(WorldRenderer.java:1629)
+	at net.minecraft.client.render.WorldRenderer.render(WorldRenderer.java:1253)
+	at net.minecraft.client.render.GameRenderer.renderWorld(GameRenderer.java:1110)
+
+-- Affected level --
+Details:
+	All players: 2 total; [ClientPlayerEntity['Player572'/10887, l='ClientLevel', x=6.50, y=67.00, z=-78.50], OtherClientPlayerEntity['_D4r10_'/251, l='ClientLevel', x=6.02, y=67.00, z=-80.00]]
+	Chunk stats: 729, 453
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (9,66,-74), Section: (at 9,2,6 in 0,4,-5; chunk contains blocks 0,-64,-80 to 15,319,-65), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,-64,-512 to 511,319,-1)
+	Level time: 394400 game time, 1000 day time
+	Server brand: Spigot
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.world.ClientWorld.addDetailsToCrashReport(ClientWorld.java:458)
+	at net.minecraft.client.MinecraftClient.addDetailsToCrashReport(MinecraftClient.java:2406)
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:826)
+	at net.minecraft.client.main.Main.main(Main.java:250)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:468)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: No
+	Packs: vanilla, fabric
+	Recovery: Yes
+	Recovery reason: java.util.concurrent.CompletionException: java.lang.RuntimeException: Mixin transformation of net.minecraft.client.render.entity.PlayerEntityRenderer failed
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:315)
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:320)
+	at java.base/java.util.concurrent.CompletableFuture$UniRun.tryFire(CompletableFuture.java:791)
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482)
+	at net.minecraft.resource.SimpleResourceReload.method_18365(SimpleResourceReload.java:69)
+	at net.minecraft.util.thread.ThreadExecutor.executeTask(ThreadExecutor.java:156)
+	at net.minecraft.util.thread.ReentrantThreadExecutor.executeTask(ReentrantThreadExecutor.java:23)
+	at net.minecraft.util.thread.ThreadExecutor.runTask(ThreadExecutor.java:130)
+	at net.minecraft.util.thread.ThreadExecutor.runTasks(ThreadExecutor.java:115)
+	at net.minecraft.client.MinecraftClient.render(MinecraftClient.java:1175)
+	at net.minecraft.client.MinecraftClient.run(MinecraftClient.java:802)
+	at net.minecraft.client.main.Main.main(Main.java:250)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:468)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+Caused by: java.lang.RuntimeException: Mixin transformation of net.minecraft.client.render.entity.PlayerEntityRenderer failed
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:427)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.tryLoadClass(KnotClassDelegate.java:323)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.loadClass(KnotClassDelegate.java:218)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:112)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	at net.minecraft.client.render.entity.EntityRenderDispatcher.reload(EntityRenderDispatcher.java:397)
+	at net.minecraft.resource.SynchronousResourceReloader.method_29490(SynchronousResourceReloader.java:15)
+	at java.base/java.util.concurrent.CompletableFuture$UniRun.tryFire(CompletableFuture.java:787)
+	... 13 more
+Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:392)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:234)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:422)
+	... 20 more
+Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [textureclient.mixins.json:TestingMixin from mod textureclient] from phase [DEFAULT] in config [textureclient.mixins.json] FAILED during APPLY
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:638)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:589)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:379)
+	... 23 more
+Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Invalid descriptor on textureclient.mixins.json:TestingMixin from mod textureclient->@Inject::ciao(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V! Expected (Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V but found (Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V [INJECT Applicator Phase -> textureclient.mixins.json:TestingMixin from mod textureclient -> Apply Injections ->  -> Inject -> textureclient.mixins.json:TestingMixin from mod textureclient->@Inject::ciao(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/text/Text;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:567)
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:497)
+	at org.spongepowered.asm.mixin.injection.code.Injector.inject(Injector.java:276)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.inject(InjectionInfo.java:445)
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.applyInjections(MixinTargetContext.java:1377)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyInjections(MixinApplicatorStandard.java:1062)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:402)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:327)
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:421)
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:403)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+	... 23 more
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Linux (amd64) version 6.2.0-26-generic
+	Java Version: 17.0.8, GraalVM Community
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), GraalVM Community
+	Memory: 599046464 bytes (571 MiB) / 1212153856 bytes (1156 MiB) up to 5742002176 bytes (5476 MiB)
+	CPUs: 4
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i5-4670 CPU @ 3.40GHz
+	Identifier: Intel64 Family 6 Model 60 Stepping 3
+	Microarchitecture: Haswell (Client)
+	Frequency (GHz): 3.40
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 4
+	Graphics card #0 name: Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller
+	Graphics card #0 vendor: Intel Corporation (0x8086)
+	Graphics card #0 VRAM (MB): 256.00
+	Graphics card #0 deviceId: 0x0412
+	Graphics card #0 versionInfo: unknown
+	Virtual memory max (MB): 12994.42
+	Virtual memory used (MB): 20079.33
+	Swap memory total (MB): 2048.00
+	Swap memory used (MB): 0.00
+	JVM Flags: 5 total; -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:JVMCIThreadsPerNativeLibraryRuntime=1 -XX:-UnlockExperimentalVMOptions
+	Fabric Mods: 
+		fabric-api: Fabric API 0.86.1+1.20.1
+		fabric-api-base: Fabric API Base 0.4.30+7abfd51577
+		fabric-api-lookup-api-v1: Fabric API Lookup API (v1) 1.6.35+4d8536c977
+		fabric-biome-api-v1: Fabric Biome API (v1) 13.0.10+b3afc78b77
+		fabric-block-api-v1: Fabric Block API (v1) 1.0.9+e022e5d177
+		fabric-blockrenderlayer-v1: Fabric BlockRenderLayer Registration (v1) 1.1.40+b3afc78b77
+		fabric-client-tags-api-v1: Fabric Client Tags 1.1.1+97bb207577
+		fabric-command-api-v2: Fabric Command API (v2) 2.2.12+b3afc78b77
+		fabric-content-registries-v0: Fabric Content Registries (v0) 4.0.9+b3afc78b77
+		fabric-convention-tags-v1: Fabric Convention Tags 1.5.4+a1a980da77
+		fabric-crash-report-info-v1: Fabric Crash Report Info (v1) 0.2.18+aeb40ebe77
+		fabric-data-generation-api-v1: Fabric Data Generation API (v1) 12.2.1+1e61dba177
+		fabric-dimensions-v1: Fabric Dimensions API (v1) 2.1.52+b3afc78b77
+		fabric-entity-events-v1: Fabric Entity Events (v1) 1.5.22+b3afc78b77
+		fabric-events-interaction-v0: Fabric Events Interaction (v0) 0.6.1+e91849a877
+		fabric-game-rule-api-v1: Fabric Game Rule API (v1) 1.0.38+b04edc7a77
+		fabric-gametest-api-v1: Fabric Game Test API (v1) 1.2.12+b3afc78b77
+		fabric-item-api-v1: Fabric Item API (v1) 2.1.27+b3afc78b77
+		fabric-item-group-api-v1: Fabric Item Group API (v1) 4.0.10+23d9108177
+		fabric-key-binding-api-v1: Fabric Key Binding API (v1) 1.0.36+fb8d95da77
+		fabric-lifecycle-events-v1: Fabric Lifecycle Events (v1) 2.2.21+b3afc78b77
+		fabric-loot-api-v2: Fabric Loot API (v2) 1.1.39+b3afc78b77
+		fabric-message-api-v1: Fabric Message API (v1) 5.1.7+3265161977
+		fabric-mining-level-api-v1: Fabric Mining Level API (v1) 2.1.49+b3afc78b77
+		fabric-model-loading-api-v1: Fabric Model Loading API (v1) 1.0.2+709a987177
+		fabric-networking-api-v1: Fabric Networking API (v1) 1.3.9+b3afc78b77
+		fabric-object-builder-api-v1: Fabric Object Builder API (v1) 11.1.1+6beca84877
+		fabric-particles-v1: Fabric Particles (v1) 1.1.1+201a23a077
+		fabric-recipe-api-v1: Fabric Recipe API (v1) 1.0.19+b3afc78b77
+		fabric-registry-sync-v0: Fabric Registry Sync (v0) 2.3.1+4df89eb277
+		fabric-renderer-api-v1: Fabric Renderer API (v1) 3.1.1+9386d8a777
+		fabric-renderer-indigo: Fabric Renderer - Indigo 1.4.1+9172968c77
+		fabric-rendering-data-attachment-v1: Fabric Rendering Data Attachment (v1) 0.3.34+b3afc78b77
+		fabric-rendering-fluids-v1: Fabric Rendering Fluids (v1) 3.0.27+b3afc78b77
+		fabric-rendering-v1: Fabric Rendering (v1) 3.0.7+b3afc78b77
+		fabric-resource-conditions-api-v1: Fabric Resource Conditions API (v1) 2.3.5+ea08f9d877
+		fabric-resource-loader-v0: Fabric Resource Loader (v0) 0.11.9+132c48c177
+		fabric-screen-api-v1: Fabric Screen API (v1) 2.0.7+b3afc78b77
+		fabric-screen-handler-api-v1: Fabric Screen Handler API (v1) 1.3.28+b3afc78b77
+		fabric-sound-api-v1: Fabric Sound API (v1) 1.0.12+b3afc78b77
+		fabric-transfer-api-v1: Fabric Transfer API (v1) 3.3.0+cdf060b277
+		fabric-transitive-access-wideners-v1: Fabric Transitive Access Wideners (v1) 4.3.0+6c31357e77
+		fabricloader: Fabric Loader 0.14.21
+		java: OpenJDK 64-Bit Server VM 17
+		minecraft: Minecraft 1.20.1
+		textureclient: Texture 1.0-SNAPSHOT
+	Launched Version: Fabric
+	Backend library: LWJGL version 3.3.1 SNAPSHOT
+	Backend API: Mesa Intel(R) HD Graphics 4600 (HSW GT2) GL version 4.6 (Core Profile) Mesa 23.0.4-0ubuntu1~22.04.1, Intel
+	Window size: 854x480
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fabric'
+	Type: Client (map_client.txt)
+	Graphics mode: fast
+	Resource Packs: 
+	Current Language: en_us
+	CPU: 4x Intel(R) Core(TM) i5-4670 CPU @ 3.40GHz

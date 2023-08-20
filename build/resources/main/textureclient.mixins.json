@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "client.texture.textureclient.events",
+  "mixins": [
+    "KeyboardMixin",
+    "InGameHudMixin",
+    "ChatMixin",
+    "CustomPayloadMixin",
+    "WindowTitleMixin",
+    "NoRainMixin",
+    "AttackMixin",
+    "SwingMixin",
+    "RenderTickMixin",
+    "LivingEntityRendererMixin",
+    "TestingMixin",
+    "NametagsMixin",
+    "PlayerPushMixin",
+    "KnockbackMixin",
+    "PacketMixin",
+    "PacketMixin2"
+  ]
+}
