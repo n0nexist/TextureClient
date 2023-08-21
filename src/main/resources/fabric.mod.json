@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "textureclient",
+  "version": "${version}",
+  "name": "Texture",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/whoami/TextureClient"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/textureclient/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "client.texture.textureclient.client.TextureClient"
+    ],
+    "main": [
+      "client.texture.textureclient.Texture"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "mixins": [
+    "textureclient.mixins.json"
+  ]
+}
